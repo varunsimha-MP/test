@@ -1,5 +1,5 @@
 locals {
-  azs = data.aws_availability_zones.azs.name
+  azs = data.aws_availability_zones.azs.names
   private_subnet = [ for subnet in aws_subnet.private_subnet: subnet.id]
   public_subnet = [ for subnet in aws_subnet.private_subnet: subnet.id]
 }
