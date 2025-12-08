@@ -1,5 +1,5 @@
 variable "ami" {
-  default = "ami-00bb6a80f01f03502"
+  default = "ami-00d8fc944fb171e29"
 }
 
 variable "public_subnet" {
