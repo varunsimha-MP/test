@@ -3,6 +3,7 @@ module "vpc" {
 }
 
 module "ec2" {
+    depends_on = [ module.vpc ]
     source = "./modules/ec2" 
     key = "mum_private_key"
     vpc_id = module.vpc.main_vpc_id

@@ -7,12 +7,12 @@ resource "aws_vpc" "main_vpc" {
 }
 
 resource "aws_internet_gateway" "main_ig" {
-    vpc_id = aws_vpc.main_vpc
+    vpc_id = aws_vpc.main_vpc.id
     tags = var.main_ig 
 }
 
 resource "aws_route_table" "main_route_table" {
-    vpc_id = aws_vpc.main_vpc
+    vpc_id = aws_vpc.main_vpc.id
     route {
         cidr_block = "0.0.0.0/0"
         gateway_id = aws_internet_gateway.main_ig.id
@@ -33,7 +33,7 @@ resource "aws_subnet" "private_subnet" {
     count = var.subnet_count
     cidr_block = var.cidr_block[count.index]
     availability_zone = local.azs[count.index]
-    vpc_id = aws_vpc.main_vpc
+    vpc_id = aws_vpc.main_vpc.id
     tags = var.pri_subnet
 }
 
