@@ -19,7 +19,7 @@ variable "pub_subnet" {
 }
 
 variable "pub_cidr" {
-  default = ["11.0.0.0/19","11.00.32.0/19"]
+  default = ["11.0.0.0/19","11.0.32.0/19"]
 }
 
 
