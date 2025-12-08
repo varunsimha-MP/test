@@ -7,11 +7,13 @@ resource "aws_vpc" "main_vpc" {
 }
 
 resource "aws_internet_gateway" "main_ig" {
+    depends_on = [ aws_vpc.main_vpc ]
     vpc_id = aws_vpc.main_vpc.id
     tags = var.main_ig 
 }
 
 resource "aws_route_table" "main_route_table" {
+    depends_on = [ aws_vpc.main_vpc ]
     vpc_id = aws_vpc.main_vpc.id
     route {
         cidr_block = "0.0.0.0/0"
@@ -21,6 +23,7 @@ resource "aws_route_table" "main_route_table" {
 }
 
 resource "aws_subnet" "public_subnet" {
+    depends_on = [ aws_vpc.main_vpc ]
     count = var.subnet_count
     vpc_id = aws_vpc.main_vpc.id
     availability_zone = local.azs[count.index]
@@ -30,21 +33,22 @@ resource "aws_subnet" "public_subnet" {
 }
 
 resource "aws_subnet" "private_subnet" {
-    count = var.subnet_count
-    cidr_block = var.cidr_block[count.index]
-    availability_zone = local.azs[count.index]
+    depends_on = [ aws_vpc.main_vpc ]
     vpc_id = aws_vpc.main_vpc.id
+    count = var.subnet_count
+    availability_zone = local.azs[count.index]
+    cidr_block = var.cidr_block[count.index]
     tags = var.pri_subnet
 }
 
 resource "aws_route_table_association" "pub_rt_associate" {
     count = var.subnet_count
-    route_table_id = aws_route_table.main_route_table
     subnet_id = aws_subnet.public_subnet.*.id[count.index]
+    route_table_id = aws_route_table.main_route_table.id
 }
 
 resource "aws_route_table_association" "pri_rt_associate" {
     count = var.subnet_count
-    route_table_id = aws_route_table.main_route_table
-    subnet_id = aws_subnet.private_subnet.*.id[count.index]  
+    subnet_id = aws_subnet.private_subnet.*.id[count.index]
+    route_table_id = aws_route_table.main_route_table.id  
 }
