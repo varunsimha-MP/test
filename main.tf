@@ -5,7 +5,7 @@ module "vpc" {
 module "ec2" {
     depends_on = [ module.vpc ]
     source = "./modules/ec2" 
-    key = "mum_private_key"
+    key = "test-singapore"
     vpc_id = module.vpc.main_vpc_id
     subnet_id = module.vpc.pub_subnet_id
     web_ingress_rule = {
