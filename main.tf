@@ -17,7 +17,7 @@ module "ec2" {
         }
         "22" = {
             port = 22
-            protocol = "SSH"
+            protocol = "tcp"
             description = "Allow SSH access"
             cidr_block = ["0.0.0.0/0"]
         }
