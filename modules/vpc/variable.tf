@@ -19,7 +19,12 @@ variable "pub_subnet" {
 }
 
 variable "pub_cidr" {
-  default = ["11.20.0.0/24","11.20.1.0/24"]
+  default = ["11.0.0.0/19","11.00.32.0/19"]
+}
+
+
+variable "pri_cidr" {
+  default = ["11.0.64.0/19","11.0.96.0/19"]
 }
 
 variable "pri_subnet" {
