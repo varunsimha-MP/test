@@ -23,13 +23,19 @@ variable "pub_cidr" {
 }
 
 variable "pri_subnet" {
-    default = "Private_Subnet" 
+    default = {
+      Name = "Private_Subnet" 
+    }
 }
 
 variable "main_ig" {
-  default = "internet_gateway"
+  default = {
+    Name = "internet_gateway"
+  } 
 }
 
 variable "main_route" {
-  default = "route_table"
+  default = {
+    Name = "route_table"
+  }
 }
