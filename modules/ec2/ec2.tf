@@ -7,7 +7,7 @@ resource "aws_instance" "ec2" {
     vpc_security_group_ids = [aws_security_group.sg_ec2.id]
     key_name = var.key
     tags = var.ec2
-    user_data = file("${path.module}/userdata.sh")
+    #user_data = file("${path.module}/userdata.sh")
 }
 
 resource "aws_security_group" "sg_ec2" {
