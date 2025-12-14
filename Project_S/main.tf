@@ -33,6 +33,6 @@ module "dns_acm" {
     source = "./modules/DNS"
     domain_name = var.domain_name
     subdomain_name = var.subdomain_name
-    public_ip = module.ec2_main.public_ip
+    public_ip = module.ec2_main.ec2_public_ip
     acm_name = var.acm_name
 }
