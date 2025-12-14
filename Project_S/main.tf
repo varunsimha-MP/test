@@ -7,7 +7,7 @@ module "ec2_main" {
     source = "./modules/instance"
     main_vpc = module.Networking.main_vpc_id
     subnet_id = module.Networking.public_subnet.id
-    key_name = var.key
+    key_name = var.key_name
     instance_ingress = var.instance_ingress
     instance_egress = var.instance_egress
 }
