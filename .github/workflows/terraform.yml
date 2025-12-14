@@ -64,3 +64,4 @@ jobs:
 
     - name: Terraform destroy
       run: terraform destroy -auto-approve -var-file="test.tfvars"
+      working-directory: ./Project_S
