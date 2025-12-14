@@ -1,12 +1,12 @@
 module "vpc_main" {
-  source = "./modules/vpc"
+  source = "./modules/Networking"
 }
 
 module "ec2_main" {
     depends_on = [ module.vpc_main ]
-    source = "./modules/ec2"
-    main_vpc = module.vpc.main_vpc_id
-    subnet_id = module.vpc.public_subnet.id
+    source = "./modules/instance"
+    main_vpc = module.Networking.main_vpc_id
+    subnet_id = module.Networking.public_subnet.id
     key = var.key
     instance_ingress = var.instance_ingress
     instance_egress = var.instance_egress
