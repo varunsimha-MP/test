@@ -19,7 +19,7 @@ variable "instance_name" {
 }
 
 variable "subnet_id" {
-    type = map(string)
+    type = list(string)
   
 }
 
