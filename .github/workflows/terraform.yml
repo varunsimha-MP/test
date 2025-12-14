@@ -63,5 +63,5 @@ jobs:
     #working-directory: ./Project_S
 
     - name: Terraform destroy
-      run: terraform destroy -auto-approve -var-file="test.tfvars"
+      run: terraform destroy -auto-approve -var-file="test.tfvars" -lock=false
       working-directory: ./Project_S
