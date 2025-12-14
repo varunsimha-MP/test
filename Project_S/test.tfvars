@@ -38,7 +38,9 @@ acm_name = {
   environment = "Test"
 }
 
-key_name = "test_singapore"
+key_name = {
+  Name = "test_singapore"
+}
 
 #Networking Module
 vpc = {

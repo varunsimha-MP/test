@@ -45,6 +45,11 @@ jobs:
       run: terraform fmt
       working-directory: ./Project_S
 
+    #Checks the validation
+    - name: Terraform validate
+      run: terraform validate
+      working-dirctory: ./Project_S
+
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       run: terraform plan -auto-approve -var-file="test.tfvars"
