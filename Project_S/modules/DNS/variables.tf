@@ -7,7 +7,7 @@ variable "subdomain_name" {
 }
 
 variable "public_ip" {
-    type = string   
+    type = list(string) 
   
 }
 

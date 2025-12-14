@@ -7,7 +7,7 @@ resource "aws_route53_record" "subdomain" {
     name =  "${var.subdomain_name}.${var.domain_name}"
     type = "A"
     ttl = 300
-    records = [var.public_ip]
+    records = var.public_ip
 }
 
 resource "aws_acm_certificate" "ssl" {
@@ -37,5 +37,5 @@ resource "aws_route53_record" "cert_validation" {
 
 resource "aws_acm_certificate_validation" "validation" {
     certificate_arn = aws_acm_certificate.ssl.arn 
-    validation_record_fqdns = [for record in aws_route53_record.cert_validation : record.fqdns]
+    validation_record_fqdns = [for record in aws_route53_record.cert_validation : record.fqdn]
 }

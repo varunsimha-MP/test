@@ -6,6 +6,7 @@ resource "aws_instance" "main_instance" {
     subnet_id = slice(var.subnet_id, count.index, count.index+1)[0]
     key_name = var.key_name
     vpc_security_group_ids = [aws_security_group.main_sg.id]
+    user_data = file("${path.module}/userdata.sh")
     tags = {
       Name = "${var.instance_name}-${count.index}"
     }
