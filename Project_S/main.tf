@@ -14,8 +14,8 @@ module "vpc_main" {
 module "ec2_main" {
     depends_on = [ module.vpc_main ]
     source = "./modules/instance"
-    main_vpc = module.Networking.main_vpc_id
-    subnet_id = module.Networking.public_subnet.id
+    main_vpc = module.vpc_main.main_vpc
+    subnet_id = module.vpc_main.pub_subnet
     key_name = var.key_name
     instance_ingress = var.instance_ingress
     instance_egress = var.instance_egress
