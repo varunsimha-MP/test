@@ -1,37 +1,7 @@
-#Root module
+#DNS module
 
 domain_name = "simha.in.net"
 subdomain_name = "subsimha.in.net"
-
-instance_egress = {
-  "all_out" = {
-    port = 0
-    protocol = "-1"
-    cidr_block = "[0.0.0.0/0]"
-    description = "Allow all outbound rule"
-  }
-}
-
-instance_ingress = {
-  "SSH" = {
-    port = 22
-    protocol = "tcp"
-    cidr_block = "[0.0.0.0/0]"
-    description = "Allow SSH inbound rule"
-  }
-  "HTTP" = {
-    port = 80
-    protocol = "http"
-    cidr_block = "[0.0.0.0/0]"
-    description = "Allow HTTP inbound rule"
-  }
-  "HTTPS" = {
-    port = 443
-    protocol = "https"
-    cidr_block = "[0.0.0.0/0]"
-    description = "Allow HTTPS inbound rule"
-  }
-}
 
 acm_name = {
   name = "simha certificate"
@@ -73,3 +43,33 @@ sg_tag_name = {
 }
 sg_name         = "instance-security-group"
 sg_description  = "Security group for EC2 instance"
+
+instance_egress = {
+  "all_out" = {
+    port = 0
+    protocol = "-1"
+    cidr_block = "[0.0.0.0/0]"
+    description = "Allow all outbound rule"
+  }
+}
+
+instance_ingress = {
+  "SSH" = {
+    port = 22
+    protocol = "tcp"
+    cidr_block = "[0.0.0.0/0]"
+    description = "Allow SSH inbound rule"
+  }
+  "HTTP" = {
+    port = 80
+    protocol = "http"
+    cidr_block = "[0.0.0.0/0]"
+    description = "Allow HTTP inbound rule"
+  }
+  "HTTPS" = {
+    port = 443
+    protocol = "https"
+    cidr_block = "[0.0.0.0/0]"
+    description = "Allow HTTPS inbound rule"
+  }
+}
