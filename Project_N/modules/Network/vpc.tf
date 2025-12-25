@@ -18,7 +18,7 @@ resource "aws_route_table" "public_rt" {
         cidr_block = "0.0.0.0/0"
         gateway_id = aws_internet_gateway.main_ig.id
     }
-    tags = var.public_rt
+    tags = var.public_route_table
     depends_on = [ aws_vpc.main_vpc ]
 }
 
@@ -65,7 +65,7 @@ resource "aws_route_table" "private_rt" {
         cidr_block = "0.0.0.0/0"
         gateway_id = aws_nat_gateway.nat.id
     }
-    tags = var.private_rt
+    tags = var.private_route_table
     depends_on = [ aws_vpc.main_vpc ]
 }
 

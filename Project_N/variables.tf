@@ -11,11 +11,11 @@ variable "cidr_block" {
     type = string
 }
 
-variable "public_rt" {   
+variable "public_route_table" {   
     type = map(string)
 }
 
-variable "private_rt" {
+variable "private_route_table" {
   type = map(string)
 }
 
