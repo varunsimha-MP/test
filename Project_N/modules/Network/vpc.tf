@@ -111,3 +111,5 @@ resource "aws_vpc_endpoint" "secret_endpoint" {
     tags = var.secret_endpoint
     depends_on = [ aws_vpc.main_vpc ]
 }
+
+
