@@ -19,7 +19,7 @@ resource "aws_route_table" "main_route" {
     }
     route {
         cidr_block = "0.0.0.0/0"
-        gateway_id = aws_nat_gateway.regional_nat.id
+        gateway_id = aws_nat_gateway.nat.id
     }
     tags = var.route_table
 }
@@ -62,11 +62,14 @@ resource "aws_eip" "eip" {
     tags = var.eip
 }
 
-resource "aws_nat_gateway" "regional_nat" {
+resource "aws_nat_gateway_eip_association" "nat_eip_association" {
+    allocation_id = aws_eip.eip.id
+    nat_gateway_id = aws_nat_gateway.nat.id
+  
+}
+resource "aws_nat_gateway" "nat" {
     connectivity_type = "public"
-    availability_mode = "regional"
-    auto_provision_zones = true
-    auto_scaling_ips = true
+    allocation_id = aws_eip.eip.id
     subnet_id = aws_subnet.public_subnet[0].id
     tags = var.nat
 }
