@@ -65,8 +65,8 @@ resource "aws_eip" "eip" {
 resource "aws_nat_gateway_eip_association" "nat_eip_association" {
     allocation_id = aws_eip.eip.id
     nat_gateway_id = aws_nat_gateway.nat.id
-  
 }
+
 resource "aws_nat_gateway" "nat" {
     connectivity_type = "public"
     allocation_id = aws_eip.eip.id

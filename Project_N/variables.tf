@@ -8,7 +8,7 @@ variable "main_ig" {
 }
 
 variable "cidr_block" {
-    type = number
+    type = list(string)
 }
 
 variable "route_table" {   
