@@ -4,7 +4,7 @@ module "Network" {
     main_ig = var.main_ig
     cidr_block = var.cidr_block
     route_table = var.route_table
-    pub_subnet_name = var.pri_subnet_name
+    pub_subnet_name = var.pub_subnet_name
     pub_subnet_count = var.pub_subnet_count
     pub_sub_cidr_block = var.pub_sub_cidr_block
     pri_subnet_name = var.pri_subnet_name
