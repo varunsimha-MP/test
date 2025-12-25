@@ -54,6 +54,10 @@ variable "nat" {
   type = map(string)
 }
 
-variable "route_table" {
+variable "public_rt" {
   type = map(string)
+}
+
+variable "private_rt" {
+    type = map(string)
 }

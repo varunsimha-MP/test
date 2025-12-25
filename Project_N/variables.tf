@@ -11,8 +11,12 @@ variable "cidr_block" {
     type = string
 }
 
-variable "route_table" {   
+variable "public_rt" {   
     type = map(string)
+}
+
+variable "private_rt" {
+  type = map(string)
 }
 
 variable "pub_subnet_name" {

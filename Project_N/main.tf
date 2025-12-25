@@ -3,10 +3,11 @@ module "Network" {
     main_vpc = var.main_vpc
     main_ig = var.main_ig
     cidr_block = var.cidr_block
-    route_table = var.route_table
+    public_rt = var.public_rt
     pub_subnet_name = var.pub_subnet_name
     pub_subnet_count = var.pub_subnet_count
     pub_sub_cidr_block = var.pub_sub_cidr_block
+    private_rt = var.private_rt
     pri_subnet_name = var.pri_subnet_name
     pri_subnet_count = var.pri_subnet_count
     pri_sub_cidr_block = var.pri_sub_cidr_block
