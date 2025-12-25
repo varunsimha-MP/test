@@ -64,9 +64,9 @@ resource "aws_eip" "eip" {
 
 resource "aws_nat_gateway" "regional_nat" {
     connectivity_type = "public"
-    #availability_mode = "regional"
-    #auto_provision_zones = true
-    #auto_scaling_ips = true
+    availability_mode = "regional"
+    auto_provision_zones = true
+    auto_scaling_ips = true
     subnet_id = aws_subnet.public_subnet[0].id
     tags = var.nat
 }

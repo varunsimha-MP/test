@@ -10,7 +10,7 @@ main_ig = {
   name = "main-igw"
 }
 
-cidr_block = 16   # Used for VPC CIDR like 10.0.0.0/16
+cidr_block = "11.0.0.0/16"   # Used for VPC CIDR like 10.0.0.0/16
 
 route_table = {
   public  = "app-rt"
