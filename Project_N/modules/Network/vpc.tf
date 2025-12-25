@@ -36,7 +36,7 @@ resource "aws_subnet" "public_subnet" {
 
 resource "aws_route_table_association" "pub_subnet_to_route" {
     count = var.pub_subnet_count
-    route_table_id = aws_route_table.main_route.id
+    route_table_id = aws_route_table.public_rt.id
     subnet_id = aws_subnet.public_subnet[count.index].id
     depends_on = [ aws_vpc.main_vpc ]
 }
@@ -54,7 +54,7 @@ resource "aws_subnet" "private_subnet" {
 
 resource "aws_route_table_association" "pri_subnet_to_route" {
     count = var.pri_subnet_count
-    route_table_id = aws_route_table.main_route.id
+    route_table_id = aws_route_table.private_rt.id
     subnet_id = aws_subnet.private_subnet[count.index].id
     depends_on = [ aws_vpc.main_vpc ]
 }
