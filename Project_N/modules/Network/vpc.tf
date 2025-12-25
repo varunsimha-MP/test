@@ -9,6 +9,7 @@ resource "aws_vpc" "main_vpc" {
 resource "aws_internet_gateway" "main_ig" {
     vpc_id = aws_vpc.main_vpc.id
     tags = var.main_ig
+    depends_on = [ aws_vpc.main_vpc ]
 }
 
 resource "aws_route_table" "main_route" {
@@ -22,6 +23,7 @@ resource "aws_route_table" "main_route" {
         gateway_id = aws_nat_gateway.nat.id
     }
     tags = var.route_table
+    depends_on = [ aws_vpc.main_vpc ]
 }
 
 resource "aws_subnet" "public_subnet" {
@@ -33,12 +35,14 @@ resource "aws_subnet" "public_subnet" {
     tags = {
         Name = "${var.pub_subnet_name}-${count.index}"
     }
+    depends_on = [ aws_vpc.main_vpc ]
 }
 
 resource "aws_route_table_association" "pub_subnet_to_route" {
     count = var.pub_subnet_count
     route_table_id = aws_route_table.main_route.id
     subnet_id = aws_subnet.public_subnet[count.index].id
+    depends_on = [ aws_vpc.main_vpc ]
 }
 
 resource "aws_subnet" "private_subnet" {
@@ -49,22 +53,26 @@ resource "aws_subnet" "private_subnet" {
     tags = {
         Name = "${var.pri_subnet_name}-${count.index}"
     }
+    depends_on = [ aws_vpc.main_vpc ]
 }
 
 resource "aws_route_table_association" "pri_subnet_to_route" {
     count = var.pri_subnet_count
     route_table_id = aws_route_table.main_route.id
     subnet_id = aws_subnet.private_subnet[count.index].id
+    depends_on = [ aws_vpc.main_vpc ]
 }
 
 resource "aws_eip" "eip" {
     domain = "vpc"
     tags = var.eip
+    depends_on = [ aws_vpc.main_vpc ]
 }
 
 resource "aws_nat_gateway_eip_association" "nat_eip_association" {
     allocation_id = aws_eip.eip.id
     nat_gateway_id = aws_nat_gateway.nat.id
+    depends_on = [ aws_vpc.main_vpc ]
 }
 
 resource "aws_nat_gateway" "nat" {
@@ -72,6 +80,7 @@ resource "aws_nat_gateway" "nat" {
     allocation_id = aws_eip.eip.id
     subnet_id = aws_subnet.public_subnet[0].id
     tags = var.nat
+    depends_on = [ aws_vpc.main_vpc ]
 }
 
 resource "aws_vpc_endpoint" "S3_endpoint" {
@@ -80,6 +89,7 @@ resource "aws_vpc_endpoint" "S3_endpoint" {
     vpc_endpoint_type = "Gateway"
     route_table_ids = [aws_route_table.main_route.id]
     tags = var.s3_endpoint
+    depends_on = [ aws_vpc.main_vpc ]
 }
 
 resource "aws_vpc_endpoint" "api_endpoint" {
@@ -89,6 +99,7 @@ resource "aws_vpc_endpoint" "api_endpoint" {
     subnet_ids = [ aws_subnet.private_subnet[0].id ]
     private_dns_enabled = true
     tags = var.api_endpoint
+    depends_on = [ aws_vpc.main_vpc ]
 }
 
 resource "aws_vpc_endpoint" "secret_endpoint" {
@@ -98,4 +109,5 @@ resource "aws_vpc_endpoint" "secret_endpoint" {
     subnet_ids = [ aws_subnet.private_subnet[0].id ]
     private_dns_enabled = true 
     tags = var.secret_endpoint
+    depends_on = [ aws_vpc.main_vpc ]
 }
