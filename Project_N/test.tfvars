@@ -17,7 +17,7 @@ public_route_table = {
 }
 
 private_route_table = {
-  Name  = "app_private-rt"
+  Name  = "app_private-rt" 
 }
 
 # -------------------
