@@ -12,11 +12,11 @@ main_ig = {
 
 cidr_block = "11.0.0.0/16"  
 
-public_rt = {
+public_route_table = {
   "Name" = "app_publci-rt"
 }
 
-pprivate_rt = {
+private_route_table = {
   Name  = "app_private-rt"
 }
 
