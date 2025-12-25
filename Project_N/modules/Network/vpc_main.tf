@@ -112,4 +112,43 @@ resource "aws_vpc_endpoint" "secret_endpoint" {
     depends_on = [ aws_vpc.main_vpc ]
 }
 
+resource "aws_security_group" "this" {
+    for_each = var.security_groups
+    name = each.key
+    description = each.value.description
+    vpc_id = aws_vpc.main_vpc.id 
 
+    dynamic "ingress" {
+        for_each = each.value.ingress
+        content {
+          from_port = ingress.value.from_port
+          to_port = ingress.value.to_port
+          protocol = ingress.value.protocol
+          cidr_blocks = lookup(ingress.value, "cidr_block", null)
+          security_groups = ingress.value.sg_refs != null ? [for sg in ingress.value.sg_refs : local.sg_map[sg]] : null
+        }
+      
+    }
+    dynamic "egress" {
+        for_each = lookup(each.value, "egress", [
+            {
+                from_port = 0
+                to_port = 0
+                protocol = "-1"
+                cidr_blocks = ["0.0.0.0/0"]
+            }
+        ])
+        content {
+          from_port = egress.value.from_port
+          to_port = egress.value.to_port
+          protocol = egress.value.protocol
+          cidr_blocks = lookup(egress.value, "cidr_block", null)
+          security_groups = lookup(egress.value, "sg_refs", null) != null ? [for sg in egress.value.sg_refs: local.sg_map[sg]]: null
+        }
+      
+    }
+    tags = {
+        Name = each.key
+    }
+  
+}

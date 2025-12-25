@@ -75,3 +75,71 @@ api_endpoint = {
   service     = "execute-api"
   type        = "Interface"
 }
+
+#---------------
+#Security Group
+#---------------
+security_groups = {
+    SG-LoadBalancer = {
+        description = "ALB security group"
+
+        ingress = [
+            {
+                from_port   = 443
+                to_port     = 443
+                protocol    = "tcp"
+                cidr_blocks = ["0.0.0.0/0"]
+            }
+        ]
+        egress = [{
+          from_port = 8000
+          protocol = "tcp"
+          sg_refs = [ "SG-ECS" ]
+          to_port = 8000
+        }]
+    }
+
+    SG-ECS = {
+        description = "ECS tasks SG"
+
+        ingress = [
+            {
+                from_port = 8000
+                to_port   = 8000
+                protocol  = "tcp"
+                sg_refs   = ["SG-LoadBalancer"]
+            }
+        ]
+    }
+
+    SG-RDS = {
+        description = "RDS SG"
+
+        ingress = [
+            {
+                from_port = 3306
+                to_port   = 3306
+                protocol  = "tcp"
+                sg_refs   = ["SG-ECS"]
+            }
+        ]
+    }
+
+    SG-Lambda = {
+        description = "Lambda SG"
+        ingress     = []
+    }
+
+    SG-SecretsEndpoint = {
+        description = "Secrets Manager VPC Endpoint SG"
+
+        ingress = [
+            {
+                from_port = 443
+                to_port   = 443
+                protocol  = "tcp"
+                sg_refs   = ["SG-ECS", "SG-Lambda"]
+            }
+        ]
+    }
+}

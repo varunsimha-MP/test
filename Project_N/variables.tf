@@ -62,3 +62,26 @@ variable "secret_endpoint" {
 variable "api_endpoint" {
     type = map(string)
 }
+
+variable "security_groups" {
+  description = "Map of security groups with dynamic rules"
+  type = map(object({
+    description = string
+
+    ingress = list(object({
+      from_port   = number
+      to_port     = number
+      protocol    = string
+      cidr_blocks = optional(list(string))
+      sg_refs     = optional(list(string))
+    }))
+
+    egress = optional(list(object({
+      from_port   = number
+      to_port     = number
+      protocol    = string
+      cidr_blocks = optional(list(string))
+      sg_refs     = optional(list(string))
+    })))
+  }))
+}

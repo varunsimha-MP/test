@@ -16,4 +16,5 @@ module "Network" {
     s3_endpoint = var.s3_endpoint
     secret_endpoint = var.secret_endpoint
     api_endpoint = var.api_endpoint   
+    security_groups = var.security_groups
 }
