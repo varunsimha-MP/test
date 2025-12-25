@@ -1,0 +1,59 @@
+variable "cidr_block" {
+  type = number
+}
+
+variable "main_vpc" {
+  type = map(string)
+}
+
+variable "main_ig" {
+    type = map(string) 
+}
+
+variable "pub_subnet_count" {
+    type = number
+}
+
+variable "pub_subnet_name" {
+    type = string
+}
+
+variable "pub_sub_cidr_block" {
+    type = list(string)
+}
+
+variable "pri_sub_cidr_block" {
+    type = list(string)
+}  
+
+variable "pri_subnet_count" {
+    type = number
+}
+
+variable "pri_subnet_name" {
+    type = string
+}
+
+variable "s3_endpoint" {
+  type = map(string)
+}
+
+variable "api_endpoint" {
+  type = map(string)
+}
+
+variable "secret_endpoint" {
+    type = map(string)
+}
+
+variable "eip" {
+    type = map(string)
+}
+
+variable "nat" {
+  type = map(string)
+}
+
+variable "route_table" {
+  type = map(string)
+}
