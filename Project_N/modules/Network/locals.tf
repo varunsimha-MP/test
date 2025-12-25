@@ -4,7 +4,7 @@ locals {
 
 locals {
   sg_map = {
-    for name, sg in aws_aws_security_group.this :
+    for name, sg in aws_security_group.this :
     name => sg.id
   }
 }
