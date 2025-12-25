@@ -3,25 +3,25 @@
 # -------------------
 
 main_vpc = {
-  name = "main-vpc"
+  Name = "main-vpc"
 }
 
 main_ig = {
-  name = "main-igw"
+  Name = "main-igw"
 }
 
 cidr_block = "11.0.0.0/16"  
 
 route_table = {
-  public  = "app-rt"
+  Name  = "app-rt"
 }
 
 # -------------------
 # Subnets
 # -------------------
 
-pub_subnet_name = "public-subnet"
-pri_subnet_name = "private-subnet"
+pub_subnet_name = "Public-subnet"
+pri_subnet_name = "Private-subnet"
 
 pub_sub_cidr_block = [
   "11.0.0.0/19",
@@ -43,11 +43,11 @@ pri_subnet_count = 3
 # -------------------
 
 eip = {
-  name = "nat-eip"
+  Name = "nat-eip"
 }
 
 nat = {
-  name = "nat-gateway"
+  Name = "nat-gateway"
 }
 
 # -------------------
@@ -55,19 +55,19 @@ nat = {
 # -------------------
 
 s3_endpoint = {
-  name        = "s3-endpoint"
+  Name        = "s3-endpoint"
   service     = "s3"
   type        = "Gateway"
 }
 
 secret_endpoint = {
-  name        = "secretsmanager-endpoint"
+  Name        = "secretsmanager-endpoint"
   service     = "secretsmanager"
   type        = "Interface"
 }
 
 api_endpoint = {
-  name        = "execute-api-endpoint"
+  Name        = "execute-api-endpoint"
   service     = "execute-api"
   type        = "Interface"
 }

@@ -69,12 +69,6 @@ resource "aws_eip" "eip" {
     depends_on = [ aws_vpc.main_vpc ]
 }
 
-resource "aws_nat_gateway_eip_association" "nat_eip_association" {
-    allocation_id = aws_eip.eip.id
-    nat_gateway_id = aws_nat_gateway.nat.id
-    depends_on = [ aws_vpc.main_vpc ]
-}
-
 resource "aws_nat_gateway" "nat" {
     connectivity_type = "public"
     allocation_id = aws_eip.eip.id
