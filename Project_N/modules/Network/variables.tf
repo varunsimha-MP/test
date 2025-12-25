@@ -1,5 +1,5 @@
 variable "cidr_block" {
-  type = number
+  type = string
 }
 
 variable "main_vpc" {
