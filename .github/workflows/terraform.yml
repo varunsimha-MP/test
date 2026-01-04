@@ -36,7 +36,7 @@ jobs:
       with:
         audience: sts.amazonaws.com.cn
         role-to-assume: arn:aws:iam::590183945701:role/terraform-to-github-oidc
-        aws-region: env.AWS_REGION
+        aws-region: ${{ env.REGION }}
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
