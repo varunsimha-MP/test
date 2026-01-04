@@ -27,13 +27,11 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
       
-    - name: Git clone the repository
-      uses: actions/checkout@v5
-    - name: configure aws credentials
-      uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502
+    - name: Configure AWS Credentials for China region audience
+      uses: aws-actions/configure-aws-credentials@v5.1.1
       with:
-        role-to-assume: arn:aws:iam::590183945701:role/terrafrom-to-github-role
-        role-session-name: samplerolesession
+        audience: sts.amazonaws.com.cn
+        role-to-assume: arn:aws:iam::590183945701:role/terraform-to-github-oicd
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
