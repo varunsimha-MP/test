@@ -31,7 +31,7 @@ jobs:
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
-        role-to-assume: arn:aws:iam::590183945701:role/terraform-to-github-oidc
+        role-to-assume: ${{ secrets.OIDC_ROLE }}
         aws-region: ${{ secrets.REGION }}
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
