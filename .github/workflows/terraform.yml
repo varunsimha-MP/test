@@ -17,6 +17,10 @@ jobs:
     defaults:
       run:
         shell: bash
+    
+    permissions:
+      id-token: write   # This is required for requesting the JWT
+      contents: read
 
     steps:
     # Checkout the repository to the GitHub Actions runner
@@ -27,11 +31,11 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
       
-    - name: Configure AWS Credentials for China region audience
+    - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v5.1.1
       with:
         audience: sts.amazonaws.com.cn
-        role-to-assume: arn:aws:iam::590183945701:role/terraform-to-github-oicd
+        role-to-assume: arn:aws:iam::590183945701:role/terraform-to-github-oidc
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
