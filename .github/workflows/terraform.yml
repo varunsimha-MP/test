@@ -54,6 +54,10 @@ jobs:
       run: terraform plan -var-file="test.tfvars" -out=tfplan
       working-directory: ./Project_S
 
+    - name: Terraform Show
+      run: terraform show tfplan
+      working-directory: ./Project_S
+
     - name: save in S3
       run: aws s3 cp tfplan s3://terraform-devops-backend-file/terraform-plans/tfplan-${GITHUB_RUN_ID}
       working-directory: ./Project_S
