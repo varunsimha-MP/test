@@ -63,7 +63,7 @@ jobs:
       working-directory: ./Project_S
 
     - name: save in S3
-      run: aws s3 cp plan-tfplan s3://terraform-devops-backend-file/terraform-plans/tfplan-${GITHUB_RUN_ID}
+      run: aws s3 cp plan-tfplan.json s3://terraform-devops-backend-file/terraform-plans/tfplan-${GITHUB_RUN_ID}
       working-directory: ./Project_S
 
       # On push to "main", build or change infrastructure according to Terraform configuration files
