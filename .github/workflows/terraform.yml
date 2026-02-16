@@ -59,7 +59,7 @@ jobs:
       working-directory: ./Project_S
 
     - name: Terraform convert to json
-      run: terraform show -json .\tfplan-${GITHUB_RUN_ID} > plan.json
+      run: terraform show -json tfplan > plan.json
       working-directory: ./Project_S
 
     - name: save in S3
