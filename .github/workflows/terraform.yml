@@ -59,7 +59,7 @@ jobs:
       working-directory: ./Project_S
 
     - name: Terraform convert to json
-      run: terraform show -json tfplan | jq . > plan-tfplan.json
+      run: terraform show -json tfplan > plan-tfplan.json
       working-directory: ./Project_S
 
     - name: save in S3
