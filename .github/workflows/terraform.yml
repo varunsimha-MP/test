@@ -55,7 +55,8 @@ jobs:
       working-directory: ./Project_S
 
     - name: save in S3
-      run: aws s3 cp tfplan s3://terraform-devops-backend-file/terraform-plans/tfplan
+      run: aws s3 cp tfplan s3://terraform-devops-backend-file/terraform-plans/tfplan-${GITHUB_RUN_ID}
+      working-directory: ./Project_S
 
       # On push to "main", build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
