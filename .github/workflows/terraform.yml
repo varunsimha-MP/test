@@ -3,10 +3,10 @@ name: 'Terraform'
 on:
   push:
     branches: [ "main" ]
-  pull_request:
 
 permissions:
   contents: read
+  id-token: write
 
 jobs:
   terraform:
@@ -31,8 +31,7 @@ jobs:
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
-        aws-access-key-id: ${{ secrets.ACCESS_KEY }}
-        aws-secret-access-key: ${{ secrets.SECRET_KEY }}
+        role-to-assume: ${{ secrets.OIDC_ROLE }}
         aws-region: ${{ secrets.REGION }}
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
@@ -62,9 +61,9 @@ jobs:
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     #- name: Terraform Apply
     #if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
-    #run: terraform apply -auto-approve -var-file="test.tfvars"
-    #working-directory: ./Project_S
+      #run: terraform apply -auto-approve -var-file="test.tfvars"
+      #working-directory: ./Project_S
 
     #- name: Terraform destroy
-     # run: terraform destroy -auto-approve -var-file="test.tfvars" -lock=false
+     # run: terraform destroy -auto-approve -var-file="test.tfvars" 
       #working-directory: ./Project_S

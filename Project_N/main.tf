@@ -1,0 +1,20 @@
+module "Network" {
+    source = "./modules/Network"
+    main_vpc = var.main_vpc
+    main_ig = var.main_ig
+    cidr_block = var.cidr_block
+    public_route_table = var.public_route_table
+    pub_subnet_name = var.pub_subnet_name
+    pub_subnet_count = var.pub_subnet_count
+    pub_sub_cidr_block = var.pub_sub_cidr_block
+    private_route_table = var.private_route_table
+    pri_subnet_name = var.pri_subnet_name
+    pri_subnet_count = var.pri_subnet_count
+    pri_sub_cidr_block = var.pri_sub_cidr_block
+    eip = var.eip
+    nat = var.nat
+    s3_endpoint = var.s3_endpoint
+    secret_endpoint = var.secret_endpoint
+    api_endpoint = var.api_endpoint     
+    #security_groups = var.security_groups
+}
